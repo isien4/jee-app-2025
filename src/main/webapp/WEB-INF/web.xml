@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        version="4.0"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+  <!-- Nom de l'application -->
+  <display-name>jee-app-2025</display-name>
+
+  <!-- Configuration des Servlets -->
+  <servlet>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>src.main.web.ProductServlet</servlet-class>
+    <load-on-startup>1</load-on-startup> <!-- Charge le servlet dès le démarrage de l'application -->
+  </servlet>
+
+  <servlet>
+    <servlet-name>CategoryServlet</servlet-name>
+    <servlet-class>src.main.web.CategoryServlet</servlet-class>
+    <load-on-startup>2</load-on-startup> <!-- Charge le servlet après le précédent -->
+  </servlet>
+
+  <!-- Configuration des mappings pour les servlets -->
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/products/*</url-pattern> <!-- URL pour accéder aux produits -->
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>CategoryServlet</servlet-name>
+    <url-pattern>/categories/*</url-pattern> <!-- URL pour accéder aux catégories -->
+  </servlet-mapping>
+
+  <!-- Configurations supplémentaires -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file> <!-- Page d'accueil de l'application -->
+  </welcome-file-list>
+
+</web-app>
