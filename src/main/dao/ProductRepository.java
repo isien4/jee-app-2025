@@ -1,12 +1,12 @@
 package src.main.dao;
 
 import src.main.database.JPAUtil;
-import src.main.entity.Product;
+import src.main.entity.produit;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class ProductRepository implements Repository<Product> {
+public class ProductRepository implements Repository<produit> {
 
     private static final Logger LOGGER = Logger.getLogger(ProductRepository.class.getName());
     private EntityManager entityManager;
@@ -16,21 +16,21 @@ public class ProductRepository implements Repository<Product> {
     }
 
     @Override
-    public void insert(Product product) {
-        LOGGER.info("Start Insertation Product " + product);
+    public void insert(produit produit) {
+        LOGGER.info("Start Insertation Product " + produit);
         entityManager.getTransaction().begin();
-        entityManager.persist(product);
+        entityManager.persist(produit);
         entityManager.getTransaction().commit();
-        LOGGER.info("End Insertation Product " + product);
+        LOGGER.info("End Insertation Product " + produit);
     }
 
     @Override
     public boolean delete(int id) {
         LOGGER.info("Start Delete Product " + id);
         entityManager.getTransaction().begin();
-        Product product = getById(id);
-        if (product != null) {
-            entityManager.remove(product);
+        produit produit = getById(id);
+        if (produit != null) {
+            entityManager.remove(produit);
             entityManager.getTransaction().commit();
             LOGGER.info("End Delete Product " + id);
             return true;
@@ -41,41 +41,41 @@ public class ProductRepository implements Repository<Product> {
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<produit> getAll() {
         LOGGER.info("Start GET ALL Products");
         entityManager.getTransaction().begin();
-        List<Product> products = entityManager.createQuery("FROM Product", Product.class).getResultList();
+        List<produit> produits = entityManager.createQuery("FROM produit", produit.class).getResultList();
         entityManager.getTransaction().commit();
         LOGGER.info("End GET ALL Products");
-        return products;
+        return produits;
     }
 
     @Override
-    public void update(Product product) {
-        LOGGER.info("Start Update Product " + product);
+    public void update(produit produit) {
+        LOGGER.info("Start Update Product " + produit);
         entityManager.getTransaction().begin();
-        entityManager.merge(product);
+        entityManager.merge(produit);
         entityManager.getTransaction().commit();
-        LOGGER.info("End Update Product " + product);
+        LOGGER.info("End Update Product " + produit);
     }
 
     @Override
-    public Product getById(int id) {
+    public produit getById(int id) {
         LOGGER.info("Start Get Product by ID " + id);
-        Product product = entityManager.find(Product.class, id);
+        produit produit = entityManager.find(produit.class, id);
         LOGGER.info("End Get Product by ID " + id);
-        return product;
+        return produit;
     }
-    public List<Product> searchByKeyword(String keyword) {
+    public List<produit> searchByKeyword(String keyword) {
         LOGGER.info("Start Search Product by keyword: " + keyword);
         entityManager.getTransaction().begin();
-        List<Product> products = entityManager
-                .createQuery("SELECT p FROM Product p WHERE LOWER(p.designation) LIKE :kw", Product.class)
+        List<produit> produits = entityManager
+                .createQuery("SELECT p FROM produit p WHERE LOWER(p.designation) LIKE :kw", produit.class)
                 .setParameter("kw", "%" + keyword.toLowerCase() + "%")
                 .getResultList();
         entityManager.getTransaction().commit();
         LOGGER.info("End Search Product by keyword: " + keyword);
-        return products;
+        return produits;
     }
 
 

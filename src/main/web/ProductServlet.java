@@ -2,8 +2,7 @@ package src.main.web;
 
 import src.main.dao.ProductRepository;
 import src.main.dao.CategoryRepository;
-import src.main.entity.Product;
-import src.main.entity.Category;
+import src.main.entity.produit;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/product")
+@WebServlet("/produit")
 public class ProductServlet extends HttpServlet {
 
     private ProductRepository productRepository;
@@ -44,8 +43,8 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "edit":
                 int idEdit = Integer.parseInt(req.getParameter("id"));
-                Product product = productRepository.getById(idEdit);
-                req.setAttribute("product", product);
+                produit produit = productRepository.getById(idEdit);
+                req.setAttribute("produit", produit);
                 req.setAttribute("categories", categoryRepository.getAll());
                 dispatcher = req.getRequestDispatcher("views/edit.jsp");
                 dispatcher.forward(req, resp);
@@ -55,15 +54,15 @@ public class ProductServlet extends HttpServlet {
                 break;
             default:
                 String keyword = req.getParameter("keyword");
-                List<Product> products;
+                List<produit> produits;
 
                 if (keyword != null && !keyword.trim().isEmpty()) {
-                    products = productRepository.searchByKeyword(keyword);
+                    produits = productRepository.searchByKeyword(keyword);
                 } else {
-                    products = productRepository.getAll();
+                    produits = productRepository.getAll();
                 }
 
-                req.setAttribute("listProduct", products);
+                req.setAttribute("listProduct", produits);
                 dispatcher = req.getRequestDispatcher("views/list.jsp");
                 dispatcher.forward(req, resp);
 
@@ -73,29 +72,29 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        Product product;
+        produit produit= null;
         RequestDispatcher dispatcher;
 
         switch (action) {
             case "save":
-                product = Product.builder()
+                produit = produit.builder()
                         .designation(req.getParameter("designation"))
                         .prix(Double.parseDouble(req.getParameter("prix")))
                         .quantite(Integer.parseInt(req.getParameter("quantite")))
-                        .category(categoryRepository.getById(Integer.parseInt(req.getParameter("category"))))
+                        .categorie(categoryRepository.getById(Integer.parseInt(req.getParameter("categorie"))))
                         .build();
-                productRepository.insert(product);
+                productRepository.insert(produit);
                 resp.sendRedirect("?action=list");
                 break;
             case "update":
-                product = Product.builder()
+                produit = produit.builder()
                         .id(Integer.parseInt(req.getParameter("id")))
                         .designation(req.getParameter("designation"))
                         .prix(Double.parseDouble(req.getParameter("prix")))
                         .quantite(Integer.parseInt(req.getParameter("quantite")))
-                        .category(categoryRepository.getById(Integer.parseInt(req.getParameter("category"))))
+                        .categorie(categoryRepository.getById(Integer.parseInt(req.getParameter("categorie"))))
                         .build();
-                productRepository.update(product);
+                productRepository.update(produit);
                 resp.sendRedirect("?action=list");
                 break;
         }

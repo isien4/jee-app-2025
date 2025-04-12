@@ -7,8 +7,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "produit")
+public class produit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,8 @@ public class Product {
     private int quantite;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "categorie")
+    private Categorie categorie;
 
-    public Product() {}
+    public produit() {}
 }

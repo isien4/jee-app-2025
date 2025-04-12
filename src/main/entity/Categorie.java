@@ -7,15 +7,15 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "categorie")
+public class Categorie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "nom")
+    private String nom;
 
-    public Category() {}
+    public Categorie() {}
 }

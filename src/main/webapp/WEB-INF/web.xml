@@ -26,7 +26,7 @@
   <!-- Configuration des mappings pour les servlets -->
   <servlet-mapping>
     <servlet-name>ProductServlet</servlet-name>
-    <url-pattern>/products/*</url-pattern> <!-- URL pour accéder aux produits -->
+    <url-pattern>/produits/*</url-pattern> <!-- URL pour accéder aux produits -->
   </servlet-mapping>
 
   <servlet-mapping>

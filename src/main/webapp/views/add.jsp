@@ -3,7 +3,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <h1>Ajouter un Produit</h1>
 
-<form action="product?action=save" method="POST">
+<form action="produit?action=save" method="POST">
 
   <label>Nom</label>
   <input type="text" class="form-control" name="designation">
@@ -18,9 +18,9 @@
   <br>
 
   <label>Catégorie</label>
-  <select name="category" class="form-control">
-    <c:forEach items="${categories}" var="category">
-      <option value="${category.id}">${category.name}</option>
+  <select name="categorie" class="form-control">
+    <c:forEach items="${categories}" var="categorie">
+      <option value="${categorie.id}">${categorie.nom}</option>
     </c:forEach>
   </select>
 
